@@ -138,7 +138,6 @@ public class CDL {
      * Produce a comma delimited text row from a JSONArray. Values containing
      * the comma character will be quoted. Troublesome characters may be
      * removed.
-	 * adding another commit with a comment
      * @param ja A JSONArray of strings.
      * @return A string ending in NEWLINE.
      */
