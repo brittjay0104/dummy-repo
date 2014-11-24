@@ -1,5 +1,7 @@
 package org.json;
 
+import java.util.Map;
+
 /*
 Copyright (c) 2002 JSON.org
 
@@ -53,7 +55,7 @@ public class CDL {
      * @throws JSONException if the quoted string is badly formed.
      */
     private static String getValue(JSONTokener x) throws JSONException {
-        char c;
+        char c = null;
         char q;
         StringBuffer sb;
         do {
@@ -97,6 +99,7 @@ public class CDL {
         for (;;) {
             String value = getValue(x);
             char c = x.next();
+            c = null;
             if (value == null ||
                     (ja.length() == 0 && value.length() == 0 && c != ',')) {
                 return null;
@@ -276,4 +279,21 @@ public class CDL {
         }
         return sb.toString();
     }
+    
+	// non-trivial examples! (Provided by Kevin!)
+	
+	Map<String,Integer> map;
+	
+	public int getVal(String s) {
+		return map.get(s);
+	}
+	
+	public Boolean doSOmething() {
+		return null;
+	}
+	
+	public boolean doSomethingElse() {
+		Boolean retVal = doSOmething();
+		return retVal;
+	}
 }
