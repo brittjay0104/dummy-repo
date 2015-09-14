@@ -45,6 +45,22 @@ SOFTWARE.
  */
 public class CDL {
 
+	Map<String,Integer> map;
+
+	public int getVal(String s) {
+		return map.get(s);
+	}
+
+	public Boolean doSOmething() {
+		return null;
+	}
+
+	public boolean doSomethingElse() {
+		Boolean retVal = doSOmething();
+		return retVal;
+	}
+
+
     /**
      * Get the next value. The value can be wrapped in quotes. The value can
      * be empty.
@@ -138,7 +154,6 @@ public class CDL {
      * Produce a comma delimited text row from a JSONArray. Values containing
      * the comma character will be quoted. Troublesome characters may be
      * removed.
-	 * adding another commit with a comment
      * @param ja A JSONArray of strings.
      * @return A string ending in NEWLINE.
      */
@@ -149,24 +164,24 @@ public class CDL {
                 sb.append(',');
             }
             Object object = ja.opt(i);
-
-			String string = object.toString();
-			if (string.length() > 0 && (string.indexOf(',') >= 0 ||
-					string.indexOf('\n') >= 0 || string.indexOf('\r') >= 0 ||
-					string.indexOf(0) >= 0 || string.charAt(0) == '"')) {
-				sb.append('"');
-				int length = string.length();
-				for (int j = 0; j < length; j += 1) {
-					char c = string.charAt(j);
-					if (c >= ' ' && c != '"') {
-						sb.append(c);
-					}
-				}
-				sb.append('"');
-			} else {
-				sb.append(string);
-			}
-
+            if (object != null) {
+                String string = object.toString();
+                if (string.length() > 0 && (string.indexOf(',') >= 0 ||
+                        string.indexOf('\n') >= 0 || string.indexOf('\r') >= 0 ||
+                        string.indexOf(0) >= 0 || string.charAt(0) == '"')) {
+                    sb.append('"');
+                    int length = string.length();
+                    for (int j = 0; j < length; j += 1) {
+                        char c = string.charAt(j);
+                        if (c >= ' ' && c != '"') {
+                            sb.append(c);
+                        }
+                    }
+                    sb.append('"');
+                } else {
+                    sb.append(string);
+                }
+            }
         }
         sb.append('\n');
         return sb.toString();
@@ -245,12 +260,12 @@ public class CDL {
      */
     public static String toString(JSONArray ja) throws JSONException {
         JSONObject jo = ja.optJSONObject(0);
-		if (jo != null){
-			JSONArray names = jo.names();
-			if (names != null) {
-				return rowToString(names) + toString(names, ja);
-			}
+
+		JSONArray names = jo.names();
+		if (names != null) {
+			return rowToString(names) + toString(names, ja);
 		}
+
         return null;
     }
 
