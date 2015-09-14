@@ -299,9 +299,7 @@ public class CDL {
                         
             for (int i = 0; i < 10; i++) 
             {
-               // do something
-            	java.util.List<String> a = java.util.Collections.emptyList();
-          
+               // do something          
             }
 
             // Create loop;
